@@ -11,6 +11,10 @@ inputs:
     type: string
   sarif:
     description: 'If provided, the path of the SARIF file to produce, relative to the repo root.'
+  markdown:
+    description: 'If provided, the path of the markdown file to produce, relative to the repo root.'
+  markdown-root:
+    description: 'If provided, the root that is set ont he markdown defaults to google's'
   slither-args:
     description: 'Extra arguments to pass to Slither.'
   slither-config:
