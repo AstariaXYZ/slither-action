@@ -11,8 +11,10 @@ SOLCVER="$2"
 NODEVER="$3"
 SARIFOUT="$4"
 SLITHERVER="$5"
+MARKDOWNOUT="$6"
 SLITHERARGS="$(get INPUT_SLITHER-ARGS)"
 SLITHERCONF="$(get INPUT_SLITHER-CONFIG)"
+MARKDOWNROOT="$(get INPUT_MARKDOWN-ROOT || "https://github.com/ORG/REPO/blob/COMMIT/")"
 IGNORECOMPILE="$(get INPUT_IGNORE-COMPILE)"
 
 compatibility_link()
@@ -174,6 +176,13 @@ if [[ -n "$SARIFOUT" ]]; then
     SARIFFLAG="--sarif=$SARIFOUT"
 fi
 
+MARKDOWNFLAG=
+if [[ -n "$MARKDOWNOUT" ]]; then
+    echo "[-] MARKDOWN output enabled, writing to $MARKDOWNOUT."
+    echo "::set-output name=markdown::$MARKDOWNOUT"
+    MARKDOWNFLAG="--markdown-root $MARKDOWNROOT"
+fi
+
 CONFIGFLAG=
 if [[ -n "$SLITHERCONF" ]]; then
     echo "[-] Slither config provided: $SLITHERCONF"
@@ -181,8 +190,8 @@ if [[ -n "$SLITHERCONF" ]]; then
 fi
 
 if [[ -z "$SLITHERARGS" ]]; then
-    slither "$TARGET" $SARIFFLAG $IGNORECOMPILEFLAG $CONFIGFLAG
+    slither "$TARGET" $SARIFFLAG $MARKDOWNFLAG $IGNORECOMPILEFLAG $CONFIGFLAG
 else
     echo "[-] SLITHERARGS provided. Running slither with extra arguments"
-    printf "%s\n" "$SLITHERARGS" | xargs slither "$TARGET" $SARIFFLAG $IGNORECOMPILEFLAG $CONFIGFLAG
+    printf "%s\n" "$SLITHERARGS" | xargs slither "$TARGET" $SARIFFLAG $MARKDOWNFLAG $IGNORECOMPILEFLAG $CONFIGFLAG
 fi

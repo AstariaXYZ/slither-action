@@ -42,5 +42,5 @@ runs:
     - ${{ inputs.sarif }}
     - ${{ inputs.slither-version }}
 branding:
-  icon: 'shield'  
+  icon: 'shield'
   color: 'red'
