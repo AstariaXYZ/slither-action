@@ -189,7 +189,7 @@ if [[ -n "$SLITHERCONF" ]]; then
     CONFIGFLAG="--config-file=$SLITHERCONF"
 fi
 
-if [[ -z "$MARKDOWNFLAG" ]]; then
+if [[ -n "$MARKDOWNFLAG" ]]; then
     slither --checklist "$TARGET" $SARIFFLAG $MARKDOWNFLAG $IGNORECOMPILEFLAG $CONFIGFLAG > $MARKDOWNOUT
 elif [[ -z "$SLITHERARGS" ]]; then
     slither "$TARGET" $SARIFFLAG $IGNORECOMPILEFLAG $CONFIGFLAG
