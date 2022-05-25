@@ -14,7 +14,7 @@ SLITHERVER="$5"
 MARKDOWNOUT="$(get INPUT_MARKDOWN)"
 SLITHERARGS="$(get INPUT_SLITHER-ARGS)"
 SLITHERCONF="$(get INPUT_SLITHER-CONFIG)"
-MARKDOWNROOT="$(get INPUT_MARKDOWN-ROOT || "https://github.com/ORG/REPO/blob/COMMIT/")"
+MARKDOWNROOT="$(get INPUT_MARKDOWN-ROOT)"
 IGNORECOMPILE="$(get INPUT_IGNORE-COMPILE)"
 
 compatibility_link()
@@ -180,7 +180,7 @@ MARKDOWNFLAG=
 if [[ -n "$MARKDOWNOUT" ]]; then
     echo "[-] MARKDOWN output enabled, writing to $MARKDOWNOUT."
     echo "::set-output name=markdown::$MARKDOWNOUT"
-    MARKDOWNFLAG="--markdown-root $MARKDOWNROOT"
+    MARKDOWNFLAG="--markdown-root $(MARKDOWNROOT:-https://github.com/ORG/REPO/blob/COMMIT/)"
 fi
 
 CONFIGFLAG=
