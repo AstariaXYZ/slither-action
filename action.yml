@@ -30,6 +30,8 @@ inputs:
 outputs:
   sarif:
     description: 'If produced, the path of the SARIF file, relative to the repo root.'
+  markdown:
+    description: 'If produced, the path of the markdown file, relative to the repo root.'
 runs:
   using: 'docker'
   image: 'Dockerfile'
