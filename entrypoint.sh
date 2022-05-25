@@ -189,9 +189,11 @@ if [[ -n "$SLITHERCONF" ]]; then
     CONFIGFLAG="--config-file=$SLITHERCONF"
 fi
 
-if [[ -z "$SLITHERARGS" ]]; then
-    slither "$TARGET" $SARIFFLAG $MARKDOWNFLAG $IGNORECOMPILEFLAG $CONFIGFLAG
+if [[ -z "$MARKDOWNFLAG" ]]; then
+    slither "$TARGET" $SARIFFLAG $MARKDOWNFLAG $IGNORECOMPILEFLAG $CONFIGFLAG > $MARKDOWNOUT
+elif [[ -z "$SLITHERARGS" ]]; then
+    slither "$TARGET" $SARIFFLAG $IGNORECOMPILEFLAG $CONFIGFLAG
 else
     echo "[-] SLITHERARGS provided. Running slither with extra arguments"
-    printf "%s\n" "$SLITHERARGS" | xargs slither "$TARGET" $SARIFFLAG $MARKDOWNFLAG $IGNORECOMPILEFLAG $CONFIGFLAG
+    printf "%s\n" "$SLITHERARGS" | xargs slither "$TARGET" $SARIFFLAG $IGNORECOMPILEFLAG $CONFIGFLAG
 fi
