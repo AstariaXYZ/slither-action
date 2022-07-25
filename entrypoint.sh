@@ -180,7 +180,7 @@ MARKDOWNFLAG=
 if [[ -n "$MARKDOWNOUT" ]]; then
     echo "[-] MARKDOWN output enabled, writing to $MARKDOWNOUT."
     echo "::set-output name=markdown::$MARKDOWNOUT"
-    MARKDOWNFLAG="--markdown-root ${MARKDOWNROOT:-https://github.com/astariaxyz/nft-bond-vault/blob/$(git rev-prase HEAD)/}"
+    MARKDOWNFLAG="--markdown-root ${MARKDOWNROOT:-https://github.com/astariaxyz/nft-bond-vault/blob/$(git rev-parse HEAD)/}"
 fi
 
 CONFIGFLAG=
